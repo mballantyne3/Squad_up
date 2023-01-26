@@ -31,20 +31,20 @@ func main() {
 	// Migrate the schema
 	db.AutoMigrate(&User{})
 
-	// Create
-	db.Create(&User{firstName: "", lastName: "", phoneNumber: "", Age: 21})
+	// Create User
+	db.Create(&User{firstName: "", lastName: "", phoneNumber: "", Age: })
 
 	// Read
-	var product User
-	db.First(&user, 1)      // find product with integer primary key
-	db.First(&lastName, "") // find product with code D42
+	var user User
+	db.First(&user, 1)           // find user with integer primary key
+	db.First(&user.lastName, "") // find user with last name ""
 
-	// Update - update product's price to 200
-	db.Model(&user).Update(Age, 25)
+	// Update - update users first name
+	db.Model(&user).Update("age", 25)
 	// Update - update multiple fields
-	db.Model(&user).Updates(firstName{fistName: "Mary"}) // non-zero fields
+	db.Model(&user).Updates(&User{firstName: "Mary"}) // non-zero fields
 	db.Model(&user).Updates(map[string]interface{}{"Price": 200, "Code": "F42"})
 
-	// Delete - delete product
-	db.Delete(&product, 1)
+	// Delete - delete user
+	db.Delete(&user, 1)
 }
